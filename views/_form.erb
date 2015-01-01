@@ -3,10 +3,37 @@
     <div class="boxInner">
     <form method="POST" action="/<%= pin.id %>">
       <input name="value" value="<%= 0 == pin.value ? '1' : '0' %>" type="hidden"/>
-      <button type="submit" value="Setzen" class="button <%= 0 == pin.value ? 'blue' : 'gray' %>">
+      <button id="pin-<%= pin.id %>" type="submit" value="Setzen" class="button <%= 0 == pin.value ? 'blue' : 'gray' %>">
         <div class="titleBox"><%= pin %></div>
       </button>
     </form>
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  //<![CDATA[
+  $(poll);
+
+  function poll() {
+    request = $.getJSON("/");
+
+    request.fail(function (jqXHR, textStatus, errorThrown){
+      console.error(textStatus + " fetching status: " + errorThrown);
+    });
+
+    request.done(function (response, textStatus, jqXHR){
+      $.each(response, function(id, value) {
+        console.log("<pin id='" + id + "'>" + value + "</pin>" );
+
+        if (0 == value)
+          $("#pin-" + id).css("border", "3px solid blue");
+        else
+          $("#pin-" + id).css("border", "3px solid red");
+      });
+    });
+
+    //setTimeout(poll, 1000);
+  }
+  //]]>
+</script>

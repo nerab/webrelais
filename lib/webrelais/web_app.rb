@@ -19,7 +19,11 @@ module Webrelais
     end
 
     get '/' do
-      erb :index
+      if request.xhr?
+        board.to_json
+      else
+        erb :index
+      end
     end
 
     post %r{/([0-7])} do |i|

@@ -1,4 +1,14 @@
+require 'json'
+
 module Webrelais
+  def self.gpio=(program)
+    @gpio = program
+  end
+
+  def self.gpio
+    @gpio ||= 'gpio'
+  end
+
   class Pin
     attr_reader :id
 
@@ -7,11 +17,11 @@ module Webrelais
     end
 
     def value
-      %x[gpio read #{id}].chomp.to_i rescue -1
+      %x[#{Webrelais.gpio} read #{id}].chomp.to_i rescue -1
     end
 
     def value=(v)
-      %x[gpio write #{id} #{v}] rescue -1
+      %x[#{Webrelais.gpio} write #{id} #{v}] rescue -1
     end
 
     def to_s
@@ -36,6 +46,10 @@ module Webrelais
 
     def pins
       @pins.dup
+    end
+
+    def to_json
+      Hash[@pins.map{|p| [p.id, p.value]}].to_json
     end
   end
 end
