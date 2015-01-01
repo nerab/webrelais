@@ -26,14 +26,17 @@
       $.each(response, function(id, value) {
         console.log("<pin id='" + id + "'>" + value + "</pin>" );
 
-        if (0 == value)
-          $("#pin-" + id).css("border", "3px solid blue");
-        else
-          $("#pin-" + id).css("border", "3px solid red");
+        pin = $("#pin-" + id);
+        if (0 == value){
+          pin.addClass("gray").removeClass("blue");
+        }
+        else{
+          pin.addClass("blue").removeClass("gray");
+        }
       });
     });
 
-    //setTimeout(poll, 1000);
+    setTimeout(poll, 1000);
   }
   //]]>
 </script>
