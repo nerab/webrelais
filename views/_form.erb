@@ -1,0 +1,12 @@
+<% board.pins.each do |pin| %>
+  <div class="box">
+    <div class="boxInner">
+    <form method="POST" action="/<%= pin.id %>">
+      <input name="value" value="<%= pin.value %>" type="hidden"/>
+      <button type="submit" value="Setzen" class="button <%= 0 == pin.value ? 'gray' : 'blue' %>">
+        <div class="titleBox"><%= pin %></div>
+      </button>
+    </form>
+    </div>
+  </div>
+<% end %>
