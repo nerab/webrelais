@@ -7,7 +7,7 @@ module Webrelais
     end
 
     def value
-      %x[gpio read #{id}].chomp rescue -1
+      %x[gpio read #{id}].chomp.to_i rescue -1
     end
 
     def value=(v)
@@ -33,7 +33,7 @@ module Webrelais
     def pin_count
       @pins.size
     end
-    
+
     def pins
       @pins.dup
     end
