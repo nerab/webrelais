@@ -7,7 +7,7 @@ module Webrelais
     register Sinatra::Flash
     register Sinatra::Partial
 
-#    set :show_exceptions, development?
+    set :show_exceptions, development?
     set :root, File.join(File.dirname(__FILE__), '..', '..')
     set :views, settings.root + '/views'
 
