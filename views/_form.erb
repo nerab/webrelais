@@ -24,15 +24,13 @@
 
     request.done(function (response, textStatus, jqXHR){
       $.each(response, function(id, value) {
-        console.log("<pin id='" + id + "'>" + value + "</pin>" );
+        console.debug("<pin id='" + id + "'>" + value + "</pin>" );
 
         pin = $("#pin-" + id);
-        if (0 == value){
-          pin.addClass("gray").removeClass("blue");
-        }
-        else{
-          pin.addClass("blue").removeClass("gray");
-        }
+        if (0 == value)
+          pin.addClass("on").removeClass("off");
+        else
+          pin.addClass("off").removeClass("on");
       });
     });
 

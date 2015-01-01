@@ -76,7 +76,7 @@ body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleB
   top: 1px;
   left:1px; 
 }
-.gray.button, .gray.button:visited
+.off.button, .off.button:visited
 {
   background-color:#CCCCCC;
   box-shadow: inset 1px 1px 2px 0 rgba(255,255,255,0.6), 
@@ -87,14 +87,9 @@ body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleB
   border-top:1px solid #999; 
   text-shadow:none; 
 }
-.gray.button:hover
+.on.button, .on.button:visited
 {
-  background-color:#999;
-  color:#111;
-} 
-.blue.button, .blue.button:visited
-{
-  background-color:#0000CC;
+  background-color:#FF0000;
   box-shadow: inset 1px 1px 2px 0 rgba(255,255,255,0.6), 
   inset -1px -1px 1px 0 rgba(100,120,140,0.6),
    1px 2px 4px 0 rgba(0,0,0,0.6);
@@ -103,8 +98,3 @@ body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleB
   border-top:1px solid #999; 
   text-shadow:none; 
 }
-.blue.button:hover
-{
-  background-color:#999;
-  color:#111;
-} 
