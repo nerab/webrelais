@@ -7,7 +7,7 @@ module Webrelais
     end
 
     def value
-      %x[gpio read #{id}] rescue -1
+      %x[gpio read #{id}].chomp rescue -1
     end
 
     def value=(v)
@@ -20,8 +20,6 @@ module Webrelais
   end
 
   class Board
-  	attr_reader :pins
-
     def initialize(pin_count)
       @pins = pin_count.times.map do |i|
         Pin.new(i)
@@ -30,6 +28,10 @@ module Webrelais
 
     def pin(id)
       @pins[id]
+    end
+
+    def pin_count
+      @pins.size
     end
   end
 end
