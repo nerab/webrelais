@@ -33,5 +33,9 @@ module Webrelais
     def pin_count
       @pins.size
     end
+    
+    def pins
+      @pins.dup
+    end
   end
 end
