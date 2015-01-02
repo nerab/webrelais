@@ -3,7 +3,7 @@
     <div class="boxInner">
     <form method="POST" action="<%= pin.id %>" class="pin-action">
       <input name="value" value="<%= 0 == pin.value ? '1' : '0' %>" type="hidden"/>
-      <button id="pin-<%= pin.id %>" type="submit" value="Setzen" class="button <%= 0 == pin.value ? 'blue' : 'gray' %>">
+      <button id="pin-<%= pin.id %>" type="submit" value="Setzen" class="button <%= 0 == pin.value ? 'on' : 'off' %>">
         <div class="titleBox"><%= pin %></div>
       </button>
     </form>
@@ -16,41 +16,58 @@
   $(".pin-action").submit(function(event){
     event.preventDefault();
 
-    $.post($(this).attr("action"), function(response){
+    var form = $(this),
+    value = form.find("input[name='value']").val(),
+    url = form.attr("action");
+
+    $.post(url, {value: value}, function(response){
         update(response);
       }, 'json')
       .fail(function (jqXHR, textStatus, errorThrown){
         console.error(textStatus + " posting form: " + errorThrown);
+        $("#status").append( "<p>content 3</p>" );
       });
   });
 
-  $(poll);
+  function poll_pins(){
+    if ($("#polling").is(':checked')){
+      request = $.getJSON("/");
 
-  function poll() {
-    request = $.getJSON("/");
+      request.fail(function (jqXHR, textStatus, errorThrown){
+        console.error(textStatus + " fetching status: " + errorThrown);
+      });
 
-    request.fail(function (jqXHR, textStatus, errorThrown){
-      console.error(textStatus + " fetching status: " + errorThrown);
-    });
+      request.done(function(response, textStatus, jqXHR){
+        update(response);
+      });
 
-    request.done(function(response, textStatus, jqXHR){
-      update(response);
-    });
-
-    setTimeout(poll, 1000);
+      setTimeout(poll_pins, 1000);
+    }
   }
+
+  $("#polling").change(function(event) {
+    $(poll_pins);
+  });
+
+  $(function(){
+    $(poll_pins);
+  });
 
   function update(response){
     // console.debug(response);
-    $.each(response, function(id, value) {
-      // console.debug("<pin id='" + id + "'>" + value + "</pin>" );
-
-      pin = $("#pin-" + id);
-      if (0 == value)
-        pin.addClass("on").removeClass("off");
-      else
-        pin.addClass("off").removeClass("on");
+    $.each(response, function(id, value){
+      set_pin(id, value);
     });
+  }
+
+  function set_pin(id, value){
+    var pin = $("#pin-" + id)
+    var msg = "Pin " + id + " = " + value;
+
+    if (0 == value)
+      pin.addClass("on").removeClass("off");
+    else
+      pin.addClass("off").removeClass("on");
   }
   //]]>
 </script>

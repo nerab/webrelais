@@ -10,7 +10,10 @@
   </head>
   <body>
     <h1>Webrelais</h1>
+    <form>
+      <label for="polling">Auto Refresh</label>
+      <input id="polling" type="checkbox" checked="true"/>
+    </form>
     <%= yield %>
-    <div id="status"/>
   </body>
 </html>

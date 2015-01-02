@@ -1,5 +1,4 @@
 * Animate status change
-* Allow user to turn off polling
 * Allow user to change polling interval
 * Log changes in browser window (not just JS console)
 * Button for 'all on'
