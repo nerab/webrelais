@@ -5,7 +5,7 @@ class TestBoard < Webrelais::TestCase
   include Webrelais
 
   def setup
-  	Webrelais.gpio = 'echo 42'
+    Webrelais.gpio = 'echo 0'
   end
 
   def test_pin_count
@@ -17,6 +17,6 @@ class TestBoard < Webrelais::TestCase
   def test_all
     board = Board.new(8)
     refute_nil(board)
-    assert_equal('{"0":42,"1":42,"2":42,"3":42,"4":42,"5":42,"6":42,"7":42}', board.to_json)
+    assert_equal('{"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1,"7":1}', board.to_json)
   end
 end

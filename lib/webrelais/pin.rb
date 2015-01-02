@@ -7,11 +7,13 @@ module Webrelais
     end
 
     def value
-      %x[#{Webrelais.gpio} read #{id}].chomp.to_i rescue -1
+      %x[#{Webrelais.gpio} read #{id}].chomp.to_i ^ 1
+    rescue
+      -1
     end
 
     def value=(v)
-      %x[#{Webrelais.gpio} write #{id} #{v}] rescue -1
+      %x[#{Webrelais.gpio} write #{id} #{v ^ 1}] rescue -1
     end
 
     def to_s
