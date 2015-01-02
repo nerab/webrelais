@@ -8,11 +8,11 @@ This is a simple web interface for controlling a HL-58S relais card via a Raspbe
 1. `git clone` this project or install the gem (see below)
 1. Start the web server with
 
-      $ foreman start
+        $ foreman start
 
 ## Installation
 
 1. Install [WiringPi](http://wiringpi.com/) for the `gpio` command.
 1. Install this gem:
 
-    $ gem install webrelais
+        $ gem install webrelais
