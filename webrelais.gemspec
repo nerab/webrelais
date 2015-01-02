@@ -19,6 +19,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'sinatra'
+  spec.add_dependency 'foreman'
+  spec.add_dependency 'unicorn'
   spec.add_dependency 'sinatra-flash'
   spec.add_dependency 'sinatra-partial'
 
