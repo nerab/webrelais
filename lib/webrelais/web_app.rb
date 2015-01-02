@@ -17,6 +17,7 @@ module Webrelais
     end
 
     get '/' do
+      logger.info("Status is #{board.to_json}")
       if request.xhr?
         board.to_json
       else
@@ -26,7 +27,12 @@ module Webrelais
 
     post %r{/([0-7])} do |i|
       pin = board.pin(i.to_i)
-      pin.value = params[:value].to_i
+      old_value = params[:value].to_i
+      new_value = 0 == old_value ? 1 : 0
+
+      logger.info("Switching #{pin} from #{old_value} to #{new_value}")
+      pin.value = new_value
+
       redirect to('/')
     end
 
