@@ -1,10 +1,8 @@
 require 'sinatra'
-require 'sinatra/flash'
 require 'sinatra/partial'
 
 module Webrelais
   class WebApp < Sinatra::Base
-    register Sinatra::Flash
     register Sinatra::Partial
 
     set :show_exceptions, development?
@@ -29,8 +27,6 @@ module Webrelais
     post %r{/([0-7])} do |i|
       pin = board.pin(i.to_i)
       pin.value = params[:value].to_i
-
-      flash(:status).now[:info] = "Relais #{i} is jetzt TODO"
       redirect to('/')
     end
 
