@@ -2,7 +2,6 @@
   <div class="box">
     <div class="boxInner">
     <form method="POST" action="<%= pin.id %>" class="pin-action">
-      <input name="value" value="<%= pin.value %>" type="hidden"/>
       <button id="pin-<%= pin.id %>" type="submit" value="Setzen" class="button <%= 1 == pin.value ? 'on' : 'off' %>">
         <div class="titleBox"><%= pin %></div>
       </button>
@@ -17,10 +16,10 @@
     event.preventDefault();
 
     var form = $(this),
-    value = form.find("input[name='value']").val(),
+    is_on = form.find("button").hasClass("on");
     url = form.attr("action");
 
-    $.post(url, {value: value}, function(response){
+    $.post(url, {value: is_on}, function(response){
         update(response);
       }, 'json')
       .fail(function (jqXHR, textStatus, errorThrown){
