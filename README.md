@@ -1,31 +1,18 @@
 # Webrelais
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'webrelais'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install webrelais
+This is a simple web interface for controlling a HL-58S relais card via a Raspberry Pi.
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Connect the pins of the relais card to the Rapis's GPIO ports 0..7
+1. `git clone` this project or install the gem (see below)
+1. Start the web server with
 
-## Contributing
+      $ foreman start
 
-1. Fork it ( https://github.com/[my-github-username]/webrelais/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+## Installation
+
+1. Install [WiringPi](http://wiringpi.com/) for the `gpio` command.
+1. Install this gem:
+
+    $ gem install webrelais
