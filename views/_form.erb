@@ -3,7 +3,7 @@
     <div class="boxInner">
     <form method="POST" action="<%= pin.id %>" class="pin-action">
       <input name="value" value="<%= pin.value %>" type="hidden"/>
-      <button id="pin-<%= pin.id %>" type="submit" value="Setzen" class="button <%= 0 == pin.value ? 'on' : 'off' %>">
+      <button id="pin-<%= pin.id %>" type="submit" value="Setzen" class="button <%= 1 == pin.value ? 'on' : 'off' %>">
         <div class="titleBox"><%= pin %></div>
       </button>
     </form>
