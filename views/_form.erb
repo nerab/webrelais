@@ -19,7 +19,7 @@
     is_on = form.find("button").hasClass("on");
     url = form.attr("action");
 
-    $.post(url, {value: is_on}, function(response){
+    $.post(url, {value: is_on ? '1' : '0'}, function(response){
         update(response);
       }, 'json')
       .fail(function (jqXHR, textStatus, errorThrown){
