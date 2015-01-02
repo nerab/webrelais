@@ -1,7 +1,7 @@
 <% board.pins.each do |pin| %>
   <div class="box">
     <div class="boxInner">
-    <form method="POST" action="/<%= pin.id %>">
+    <form method="POST" action="<%= pin.id %>" class="pin-action">
       <input name="value" value="<%= 0 == pin.value ? '1' : '0' %>" type="hidden"/>
       <button id="pin-<%= pin.id %>" type="submit" value="Setzen" class="button <%= 0 == pin.value ? 'blue' : 'gray' %>">
         <div class="titleBox"><%= pin %></div>
@@ -13,6 +13,17 @@
 
 <script type="text/javascript">
   //<![CDATA[
+  $(".pin-action").submit(function(event){
+    event.preventDefault();
+
+    $.post($(this).attr("action"), function(response){
+        update(response);
+      }, 'json')
+      .fail(function (jqXHR, textStatus, errorThrown){
+        console.error(textStatus + " posting form: " + errorThrown);
+      });
+  });
+
   $(poll);
 
   function poll() {
@@ -22,19 +33,24 @@
       console.error(textStatus + " fetching status: " + errorThrown);
     });
 
-    request.done(function (response, textStatus, jqXHR){
-      $.each(response, function(id, value) {
-        console.debug("<pin id='" + id + "'>" + value + "</pin>" );
-
-        pin = $("#pin-" + id);
-        if (0 == value)
-          pin.addClass("on").removeClass("off");
-        else
-          pin.addClass("off").removeClass("on");
-      });
+    request.done(function(response, textStatus, jqXHR){
+      update(response);
     });
 
     setTimeout(poll, 1000);
+  }
+
+  function update(response){
+    // console.debug(response);
+    $.each(response, function(id, value) {
+      // console.debug("<pin id='" + id + "'>" + value + "</pin>" );
+
+      pin = $("#pin-" + id);
+      if (0 == value)
+        pin.addClass("on").removeClass("off");
+      else
+        pin.addClass("off").removeClass("on");
+    });
   }
   //]]>
 </script>
